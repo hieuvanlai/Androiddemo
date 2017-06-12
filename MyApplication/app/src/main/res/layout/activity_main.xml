@@ -1,137 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
+
     android:padding="16dp"
-    tools:context="com.example.hieuv.myapplication.MainActivity"
-    android:orientation="vertical">
+    tools:context="com.example.hieuv.myapplication.MainActivity">
 
-    <!--<View-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="2"-->
-    <!--android:background="@color/colorAccent"-->
-    <!--/>-->
-    <!--<View-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="120dp"-->
-        <!--/>-->
-    <!--<View-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:tag="a"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/ivwhite1"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_white_key" />
+
+        <ImageView
+            android:tag="b"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/ivwhite2"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/default_white_key" />
+
+        <ImageView
+            android:tag="c"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/ivwhite3"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/default_white_key" />
+
+        <ImageView
+            android:tag="d"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/ivwhite4"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/default_white_key" />
+
+        <ImageView
+            android:tag="e"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/ivwhite5"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/default_white_key" />
+
+        <ImageView
+            android:tag="f"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/ivwhite6"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/default_white_key" />
+
+        <ImageView
+            android:tag="g"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:id="@+id/ivwhite7"
+
+            android:src="@drawable/default_white_key" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:layout_weight="1.5" />
+
+        <ImageView
+            android:tag="A"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:id="@+id/ivblack1"
+
+            android:src="@drawable/default_black_key" />
+
+        <View
+            android:layout_width="0dp"
+            android:visibility="invisible"
+
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:tag="B"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:id="@+id/ivblack2"
+
+            android:layout_weight="1"
+            android:src="@drawable/default_black_key" />
+
+        <View
+            android:layout_width="0dp"
+            android:visibility="invisible"
+
+            android:layout_height="match_parent"
+            android:layout_weight="3" />
+
+        <ImageView
+            android:tag="C"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:id="@+id/ivblack3"
 
 
+            android:src="@drawable/default_black_key" />
+
+        <View
+            android:layout_width="0dp"
+            android:visibility="invisible"
+
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+
+            android:layout_weight="1" />
+
+        <ImageView
+            android:tag="D"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:id="@+id/ivblack4"
 
 
-    <Button
-    android:textAllCaps="false"
-    android:layout_centerHorizontal="true"
-    android:layout_width="wrap_content"
-    android:layout_height="399dp"
-    android:id="@+id/bt_hello"
-        android:layout_x="35dp"
+            android:layout_weight="1"
+            android:src="@drawable/default_black_key" />
+
+        <View
+            android:layout_width="0dp"
+            android:visibility="invisible"
+
+            android:layout_height="match_parent"
 
 
-        android:layout_y="-18dp" />
-    <Button
-        android:textAllCaps="false"
-        android:layout_centerHorizontal="true"
-        android:layout_width="40dp"
-        android:layout_height="120dp"
-        android:id="@+id/bt_hello8"
-        android:layout_x="90dp"
-        android:background="@color/colorPrimary"
+            android:layout_weight="1" />
 
-        android:layout_y="-18dp" />
+        <ImageView
+            android:tag="e"
 
-    <Button
-        android:id="@+id/bt_hello2"
-        android:layout_width="wrap_content"
-        android:layout_height="399dp"
-        android:layout_centerHorizontal="true"
-        android:layout_x="125dp"
-        android:layout_y="-39dp"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/bt_hello3"
-        android:layout_width="wrap_content"
-        android:layout_height="399dp"
-        android:layout_centerHorizontal="true"
-        android:layout_x="215dp"
-        android:layout_y="-39dp"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/bt_hello4"
-        android:layout_width="wrap_content"
-        android:layout_height="399dp"
-        android:layout_centerHorizontal="true"
-        android:layout_x="305dp"
-        android:layout_y="-39dp"
-        android:textAllCaps="false" />
-    <Button
-    android:id="@+id/bt_hello5"
-    android:layout_width="wrap_content"
-    android:layout_height="399dp"
-    android:layout_centerHorizontal="true"
-    android:layout_x="395dp"
-    android:layout_y="-39dp"
-    android:textAllCaps="false" />
-    <Button
-        android:id="@+id/bt_hello6"
-        android:layout_width="wrap_content"
-        android:layout_height="399dp"
-        android:layout_centerHorizontal="true"
-        android:layout_x="485dp"
-        android:layout_y="-39dp"
-        android:textAllCaps="false" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:id="@+id/ivblack5"
 
+            android:layout_weight="1"
+            android:src="@drawable/default_black_key" />
 
-    <Button
-        android:id="@+id/bt_hello9"
-        android:layout_width="40dp"
-        android:layout_height="110dp"
-        android:layout_centerHorizontal="true"
-        android:layout_x="180dp"
-        android:layout_y="-9dp"
-        android:background="@color/colorPrimary"
+        <View
+            android:layout_width="0dp"
+            android:visibility="invisible"
 
-        android:textAllCaps="false" />
+            android:layout_height="match_parent"
+            android:layout_weight="1.5" />
 
-    <Button
-        android:id="@+id/bt_hello10"
-        android:layout_width="40dp"
-        android:layout_height="110dp"
-        android:layout_centerHorizontal="true"
-        android:layout_x="269dp"
-        android:layout_y="-9dp"
-        android:background="@color/colorPrimary"
+    </LinearLayout>
 
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/bt_hello11"
-        android:layout_width="40dp"
-        android:layout_height="110dp"
-        android:layout_centerHorizontal="true"
-        android:layout_x="360dp"
-        android:layout_y="-9dp"
-        android:background="@color/colorPrimary"
+    <View
+        android:layout_width="match_parent"
+        android:visibility="invisible"
 
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/bt_hello12"
-        android:layout_width="40dp"
-        android:layout_height="110dp"
-        android:layout_centerHorizontal="true"
-        android:layout_x="450dp"
-        android:layout_y="-9dp"
-        android:background="@color/colorPrimary"
-
-        android:textAllCaps="false" />
-
-</AbsoluteLayout>
+        android:layout_height="0dp"
+        android:layout_weight="0.4" />
+</LinearLayout>
+</RelativeLayout>
