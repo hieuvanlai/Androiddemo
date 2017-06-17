@@ -9,11 +9,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.hieuv.drumpads.noteplayer.NotePlayer;
+import com.example.hieuv.drumpads.touches.Touch;
+import com.example.hieuv.drumpads.touches.TouchAction;
+
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ImageView> ivkeyPads = new ArrayList<>();
     private static final String TAG = MainActivity.class.toString() ;
+    private List<TouchInfo> touchInfoList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +42,122 @@ public class MainActivity extends AppCompatActivity {
         ivkeyPads.add((ImageView) findViewById(R.id.key32));
         ivkeyPads.add((ImageView) findViewById(R.id.key33));
         ivkeyPads.add((ImageView) findViewById(R.id.key34));
+        NotePlayer.loadSounds(this);
+
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        List<Touch> touches = Touch.processEvent(event);
 
+        Log.d(TAG, String.format("onTouchEvent: %s", touches));
 
-            for (ImageView imageView:ivkeyPads){
-                if (isInside(event.getX(),event.getY(),imageView)){
-                    imageView.setImageResource(R.drawable.key2);
-                }else {
-                    imageView.setImageResource(R.drawable.key);
-                };
+        if (touches.size() == 0) return false;
+
+        Touch firstTouch = touches.get(0);
+
+        if (firstTouch.getAction() == TouchAction.DOWN) {
+            ImageView pressedKey = findKeyByTouch(firstTouch);
+            if (pressedKey != null && !checkPressedKey(pressedKey)) {
+                //TODO: Play note
+                String note = pressedKey.getTag().toString();
+                NotePlayer.play(note);
+
+                touchInfoList.add(new TouchInfo(pressedKey, firstTouch));
             }
-        Log.d(TAG,"onTouchEvent"+event.getX()+" "+event.getY());
+        }
+        else if (firstTouch.getAction() == TouchAction.UP) {
+            ImageView pressedKey = findKeyByTouch(firstTouch);
+
+            if (pressedKey != null) {
+                Iterator<TouchInfo> touchInfoIterator = touchInfoList.iterator();
+                while(touchInfoIterator.hasNext()) {
+                    TouchInfo touchInfo = touchInfoIterator.next();
+                    if (touchInfo.touch.getTouchId() == firstTouch.getTouchId()) {
+                        touchInfoIterator.remove();
+                    }
+                }
+            }
+        }
+        else if (firstTouch.getAction() == TouchAction.MOVE) {
+            for (Touch touch: touches) {
+                ImageView pressedKey = findKeyByTouch(touch);
+
+                Iterator<TouchInfo> touchInfoIterator = touchInfoList.iterator();
+                while(touchInfoIterator.hasNext()) {
+                    TouchInfo touchInfo = touchInfoIterator.next();
+                    if (touchInfo.touch.equals(touch) && touchInfo.pressedKey != pressedKey) {
+                        touchInfoIterator.remove();
+                    }
+                }
+
+                if (pressedKey != null) {
+                    if (!checkPressedKey(pressedKey)) {
+                        //TODO: Play note
+                        String note = pressedKey.getTag().toString();
+                        NotePlayer.play(note);
+
+                        touchInfoList.add(new TouchInfo(pressedKey, touch));
+                    }
+                }
+
+            }
+        }
+
+
+//        Log.d(TAG, String.format("onTouchEvent: %s", touches));
+
+//        for (ImageView blackKey : blackKeys) {
+//            if (isInside(event.getX(), event.getY(), blackKey)) {
+//                Log.d(TAG, "onTouchEvent: " + blackKey.getTag());
+//            }
+//        }
+//
+//        for (ImageView whiteKey : whiteKeys) {
+//            if (isInside(event.getX(), event.getY(), whiteKey)) {
+//                Log.d(TAG, "onTouchEvent: " + whiteKey.getTag());
+//            }
+//        }
+
+        updateKeyImages();
         return super.onTouchEvent(event);
     }
-    public  boolean isInside(float x, float y, View v){
-        int[] location = new int[2];
-        v.getLocationOnScreen(location);
-        int left = location[0];
-        int top = location[1];
-        int right= left + v.getWidth();
-        int bottom= top + v.getHeight();
-        return x>left && x <right&&y>top&&y<bottom;
-
+    private void updateKeyImages(){
+        for (ImageView ivKeyPad : ivkeyPads){
+            if (checkPressedKey(ivKeyPad)){
+                ivKeyPad.setImageResource(R.drawable.key2);
+            }else {
+                ivKeyPad.setImageResource(R.drawable.key);
+            }
+        }
     }
+    private boolean checkPressedKey(ImageView pressedKey){
+        for (TouchInfo touchInfo: touchInfoList){
+            if (touchInfo.pressedKey==pressedKey){
+                return true;
+            }
+        }
+        return false;
+    }
+    private ImageView findKeyByTouch(Touch touch){
+        for (ImageView ivKeyPad: ivkeyPads){
+            if (touch.checkHit(ivKeyPad)){
+                return ivKeyPad;
+            }
+        }
+        return null;
+    }
+
+
+}
+class TouchInfo{
+    public ImageView pressedKey;
+    public Touch touch;
+
+    public TouchInfo(ImageView pressedKey, Touch touch) {
+        this.pressedKey = pressedKey;
+        this.touch = touch;
+    }
+
 }
